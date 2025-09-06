@@ -1,10 +1,11 @@
 from telethon import events, types
+from telethon.tl.functions.messages import SendReactionRequest
+from telethon.tl.types import ReactionEmoji, ReactionCustomEmoji
 from .. import loader, utils
 import logging
 
 logger = logging.getLogger(__name__)
-__version__ = (1, 3, 0)
-
+__version__ = (1, 4, 8, 8)
 
 #░█░█░█▀▀░█▀█░█▀▀░▀█▀░█▀▄░█▀▀
 #░▄▀▄░█▀▀░█░█░▀▀█░░█░░█░█░█▀▀
@@ -85,7 +86,7 @@ class AutoReactMod(loader.Module):
 
     @loader.watcher()
     async def watcher(self, message):
-        if not isinstance(message, types.Message):
+        if not isinstance(message, types.Message) or not message.peer_id:
             return
             
         chat_id = str(message.chat_id)
@@ -94,9 +95,22 @@ class AutoReactMod(loader.Module):
             return
 
         try:
+            reaction_to_send = []
+            current_reaction_config = self.config["current_reaction"]
+
             if self.config["is_premium"]:
-                await message.react(types.ReactionCustomEmoji(document_id=int(self.config["current_reaction"])))
+                reaction_to_send.append(
+                    ReactionCustomEmoji(document_id=int(current_reaction_config))
+                )
             else:
-                await message.react(self.config["current_reaction"])
+                reaction_to_send.append(
+                    ReactionEmoji(emoticon=current_reaction_config)
+                )
+            
+            await self._client(SendReactionRequest(
+                peer=message.peer_id,
+                msg_id=message.id,
+                reaction=reaction_to_send
+            ))
         except Exception as e:
-            logger.error(f"Ошибка при установке реакции: {str(e)}")
+            logger.error(f"Ошибка при установке реакции: {e}")
