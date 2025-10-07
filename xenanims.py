@@ -5,9 +5,7 @@ __version__ = (0, 3, 4)
 #░▄▀▄░█▀▀░█░█░▀▀█░░█░░█░█░█▀▀
 #░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀░░▀▀▀
 
-# 🔒 Licensed under the AGPL-3.0
-# 🥱 Im not allowing to edit this module.
-# 🌐 https://www.gnu.org/licenses/agpl-3.0.html
+# 🔒 Licensed under All Rights Reserved.
 # meta developer: @XenSideMOD
 
 from .. import loader, utils

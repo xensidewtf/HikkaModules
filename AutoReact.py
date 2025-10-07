@@ -11,9 +11,7 @@ __version__ = (1, 4, 8, 8)
 #░▄▀▄░█▀▀░█░█░▀▀█░░█░░█░█░█▀▀
 #░▀░▀░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀░░▀▀▀
 
-# 🔒 Licensed under the AGPL-3.0
-# 🥱 Im not allowing to edit this module.
-# 🌐 https://www.gnu.org/licenses/agpl-3.0.html
+# 🔒 Licensed under All Rights Reserved.
 # meta developer: @XenSideMOD
 
 @loader.tds
